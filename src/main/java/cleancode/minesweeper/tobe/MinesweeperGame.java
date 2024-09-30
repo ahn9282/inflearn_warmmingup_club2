@@ -5,9 +5,16 @@ import java.util.Scanner;
 
 public class MinesweeperGame {
 
-    private static String[][] board = new String[8][10];
-    private static Integer[][] landMineCounts = new Integer[8][10];
-    private static boolean[][] landMines = new boolean[8][10];
+    public static final int BOARD_ROW_SIZE = 8;
+    public static final int BOARD_COL_SIZE = 10;
+    private static final String[][] BOARD = new String[BOARD_ROW_SIZE][BOARD_COL_SIZE];
+    private static final Integer[][] LAND_MINE_COUNTS = new Integer[BOARD_ROW_SIZE][BOARD_COL_SIZE];
+    private static final boolean[][] LAND_MINES = new boolean[BOARD_ROW_SIZE][BOARD_COL_SIZE];
+    public static final int LAND_MINE_COUNT = 10;
+    public static final String FLAG_SIGN ="⚑";
+    public static final String LAND_MINE_SIGN  = "☼";
+    public static final String CLOSED_CELL_SIGN ="□";
+    public static final String OPENED_CELL_SIGN = "■";
     private static int gameStatus = 0; // 0: 게임 중, 1: 승리, -1: 패배
 
     public static void main(String[] args) {
@@ -29,11 +36,11 @@ public class MinesweeperGame {
             int selectedColIndex = getSelectedColIndex(cellInput);
             int selectedRowIndex = getSelectedRowIndex(cellInput);
             if (userActionInput.equals("2")) {
-                board[selectedRowIndex][selectedColIndex] = "⚑";
+                BOARD[selectedRowIndex][selectedColIndex] = FLAG_SIGN;
                 checkAllCellIsOpened();
             } else if (userActionInput.equals("1")) {
-                if (landMines[selectedRowIndex][selectedColIndex]) {
-                    board[selectedRowIndex][selectedColIndex] = "☼";
+                if (LAND_MINES[selectedRowIndex][selectedColIndex]) {
+                    BOARD[selectedRowIndex][selectedColIndex] =LAND_MINE_SIGN;
                     gameStatus = -1;
                     continue;
                 } else {
@@ -90,7 +97,7 @@ public class MinesweeperGame {
         boolean isAllOpened = true;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 10; j++) {
-                if (board[i][j].equals("□")) {
+                if (BOARD[i][j].equals(CLOSED_CELL_SIGN)) {
                     isAllOpened = false;
                 }
             }
@@ -131,7 +138,7 @@ public class MinesweeperGame {
         for (int i = 0; i < 8; i++) {
             System.out.printf("%d  ", i + 1);
             for (int j = 0; j < 10; j++) {
-                System.out.print(board[i][j] + " ");
+                System.out.print(BOARD[i][j] + " ");
             }
             System.out.println();
         }
@@ -140,46 +147,46 @@ public class MinesweeperGame {
     private static void initalozeGame() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 10; j++) {
-                board[i][j] = "□";
+                BOARD[i][j] = CLOSED_CELL_SIGN;
             }
         }
         for (int i = 0; i < 10; i++) {
             int col = new Random().nextInt(10);
             int row = new Random().nextInt(8);
-            landMines[row][col] = true;
+            LAND_MINES[row][col] = true;
         }
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 10; col++) {
                 int count = 0;
-                if (!landMines[row][col]) {
-                    if (row - 1 >= 0 && col - 1 >= 0 && landMines[row - 1][col - 1]) {
+                if (!LAND_MINES[row][col]) {
+                    if (row - 1 >= 0 && col - 1 >= 0 && LAND_MINES[row - 1][col - 1]) {
                         count++;
                     }
-                    if (row - 1 >= 0 && landMines[row - 1][col]) {
+                    if (row - 1 >= 0 && LAND_MINES[row - 1][col]) {
                         count++;
                     }
-                    if (row - 1 >= 0 && col + 1 < 10 && landMines[row - 1][col + 1]) {
+                    if (row - 1 >= 0 && col + 1 < 10 && LAND_MINES[row - 1][col + 1]) {
                         count++;
                     }
-                    if (col - 1 >= 0 && landMines[row][col - 1]) {
+                    if (col - 1 >= 0 && LAND_MINES[row][col - 1]) {
                         count++;
                     }
-                    if (col + 1 < 10 && landMines[row][col + 1]) {
+                    if (col + 1 < 10 && LAND_MINES[row][col + 1]) {
                         count++;
                     }
-                    if (row + 1 < 8 && col - 1 >= 0 && landMines[row + 1][col - 1]) {
+                    if (row + 1 < 8 && col - 1 >= 0 && LAND_MINES[row + 1][col - 1]) {
                         count++;
                     }
-                    if (row + 1 < 8 && landMines[row + 1][col]) {
+                    if (row + 1 < 8 && LAND_MINES[row + 1][col]) {
                         count++;
                     }
-                    if (row + 1 < 8 && col + 1 < 10 && landMines[row + 1][col + 1]) {
+                    if (row + 1 < 8 && col + 1 < 10 && LAND_MINES[row + 1][col + 1]) {
                         count++;
                     }
-                    landMineCounts[row][col] = count;
+                    LAND_MINE_COUNTS[row][col] = count;
                     continue;
                 }
-                landMineCounts[row][col] = 0;
+                LAND_MINE_COUNTS[row][col] = 0;
             }
         }
     }
@@ -194,17 +201,17 @@ public class MinesweeperGame {
         if (row < 0 || row >= 8 || col < 0 || col >= 10) {
             return;
         }
-        if (!board[row][col].equals("□")) {
+        if (!BOARD[row][col].equals(CLOSED_CELL_SIGN)) {
             return;
         }
-        if (landMines[row][col]) {
+        if (LAND_MINES[row][col]) {
             return;
         }
-        if (landMineCounts[row][col] != 0) {
-            board[row][col] = String.valueOf(landMineCounts[row][col]);
+        if (LAND_MINE_COUNTS[row][col] != 0) {
+            BOARD[row][col] = String.valueOf(LAND_MINE_COUNTS[row][col]);
             return;
         } else {
-            board[row][col] = "■";
+            BOARD[row][col] = OPENED_CELL_SIGN;
         }
         open(row - 1, col - 1);
         open(row - 1, col);
