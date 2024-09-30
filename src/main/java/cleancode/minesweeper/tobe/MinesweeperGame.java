@@ -16,39 +16,67 @@ public class MinesweeperGame {
         initalozeGame();
         while (true) {
             showBoard();
-            if (gameStatus == 1) {
+            if (doesUserWinGame()) {
                 System.out.println("지뢰를 모두 찾았습니다. GAME CLEAR!");
                 break;
             }
-            if (gameStatus == -1) {
+            if (doesUserLoseGame()) {
                 System.out.println("지뢰를 밟았습니다. GAME OVER!");
                 break;
             }
-            System.out.println();
-            System.out.println("선택할 좌표를 입력하세요. (예: a1)");
-            String cellInput = scanner.nextLine();
-            System.out.println("선택한 셀에 대한 행위를 선택하세요. (1: 오픈, 2: 깃발 꽂기)");
-            String userActionInput = scanner.nextLine();
-            char cellInputCol = cellInput.charAt(0);
-            char cellInputRow = cellInput.charAt(1);
-            int selectedColIndex = convertColFrom(cellInputCol);
-            int row = Character.getNumericValue(cellInputRow) - 1;
+            String cellInput = getCellInputFromUser(scanner);
+            String userActionInput = getUserActionInputFromUser(scanner);
+            int selectedColIndex = getSelectedColIndex(cellInput);
+            int selectedRowIndex = getSelectedRowIndex(cellInput);
             if (userActionInput.equals("2")) {
-                board[row][selectedColIndex] = "⚑";
+                board[selectedRowIndex][selectedColIndex] = "⚑";
                 checkAllCellIsOpened();
             } else if (userActionInput.equals("1")) {
-                if (landMines[row][selectedColIndex]) {
-                    board[row][selectedColIndex] = "☼";
+                if (landMines[selectedRowIndex][selectedColIndex]) {
+                    board[selectedRowIndex][selectedColIndex] = "☼";
                     gameStatus = -1;
                     continue;
                 } else {
-                    open(row, selectedColIndex);
+                    open(selectedRowIndex, selectedColIndex);
                 }
                 checkAllCellIsOpened();
             } else {
                 System.out.println("잘못된 번호를 선택하셨습니다.");
             }
         }
+    }
+
+    private static int getSelectedRowIndex(String cellInput) {
+        char cellInputRow = cellInput.charAt(1);
+        int row = Character.getNumericValue(cellInputRow) - 1;
+        return row;
+    }
+
+    private static int getSelectedColIndex(String cellInput) {
+        char cellInputCol = cellInput.charAt(0);
+        int selectedColIndex = convertColFrom(cellInputCol);
+        return selectedColIndex;
+    }
+
+    private static String getUserActionInputFromUser(Scanner scanner) {
+        System.out.println("선택한 셀에 대한 행위를 선택하세요. (1: 오픈, 2: 깃발 꽂기)");
+        String userActionInput = scanner.nextLine();
+        return userActionInput;
+    }
+
+    private static String getCellInputFromUser(Scanner scanner) {
+        System.out.println();
+        System.out.println("선택할 좌표를 입력하세요. (예: a1)");
+        String cellInput = scanner.nextLine();
+        return cellInput;
+    }
+
+    private static boolean doesUserLoseGame() {
+        return gameStatus == -1;
+    }
+
+    private static boolean doesUserWinGame() {
+        return gameStatus == 1;
     }
 
     private static void checkAllCellIsOpened() {
