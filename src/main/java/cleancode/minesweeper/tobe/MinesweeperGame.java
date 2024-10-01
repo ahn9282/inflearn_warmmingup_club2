@@ -24,6 +24,7 @@ public class MinesweeperGame {
         showGameStartCOmments();
         initalozeGame();
         while (true) {
+            try{
             showBoard();
             if (doesUserWinGame()) {
                 System.out.println("지뢰를 모두 찾았습니다. GAME CLEAR!");
@@ -36,6 +37,13 @@ public class MinesweeperGame {
             String cellInput = getCellInputFromUser(SCANNER);
             String userActionInput = getUserActionInputFromUser(SCANNER);
             actOnCell(cellInput, userActionInput);
+
+            }catch(AppException e){
+                System.out.println(e.getMessage());
+            }catch(Exception e){
+                System.out.println("프로그램에 문제가 생겼습니다.");
+                e.printStackTrace();
+            }
         }
     }
 
@@ -61,13 +69,19 @@ public class MinesweeperGame {
 
     private static int getSelectedRowIndex(String cellInput) {
         char cellInputRow = cellInput.charAt(1);
-        int row = Character.getNumericValue(cellInputRow) - 1;
-        return row;
+        return convertRowFrom(cellInputRow);
     }
+    private static int convertRowFrom(char cellInputRow) {
 
+        int rowIndex = Character.getNumericValue(cellInputRow) - 1;
+        if(rowIndex > BOARD_ROW_SIZE){
+            throw new AppException("잘못된 입력입니다.");
+        }
+        return rowIndex;
+    }
     private static int getSelectedColIndex(String cellInput) {
         char cellInputCol = cellInput.charAt(0);
-        int selectedColIndex = convertColFrom(cellInputCol);
+        int selectedColIndex = convertCellFrom(cellInputCol);
         return selectedColIndex;
     }
 
@@ -120,8 +134,7 @@ public class MinesweeperGame {
                 .noneMatch(cell -> cell.equals(CLOSED_CELL_SIGN));
     }
 
-    private static int convertColFrom(char c) {
-        int selectedColIndex;
+    private static int convertCellFrom(char c) {
         switch (c) {
             case 'a':
                 return 0;
@@ -144,7 +157,7 @@ public class MinesweeperGame {
             case 'j':
                 return 9;
             default:
-                return -1;
+                throw new AppException("잘못된 입력입니다.");
         }
     }
 
