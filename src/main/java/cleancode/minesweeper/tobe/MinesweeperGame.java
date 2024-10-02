@@ -16,7 +16,7 @@ public class MinesweeperGame {
     private static int gameStatus = 0; // 0: 게임 중, 1: 승리, -1: 패배
 
     public static void main(String[] args) {
-        showGameStartCOmments();
+        showGameStartComments();
         initializeGame();
         while (true) {
             try {
@@ -48,7 +48,7 @@ public class MinesweeperGame {
 
         if (doesUserChooseToPlantFlag(userActionInput)) {
 
-            BOARD[selectedRowIndex][selectedColIndex] = Cell.ofFlag();
+            BOARD[selectedRowIndex][selectedColIndex].flag();
             checkIfGameIsOver();
 
         } else if (doesUserChooseToOpenCell(userActionInput)) {
@@ -146,7 +146,7 @@ public class MinesweeperGame {
 
         return Arrays.stream(BOARD)
                 .flatMap(Arrays::stream)
-                .noneMatch(Cell::isClosed);
+                .allMatch(Cell::isChecked);
     }
 
     private static int convertCellFrom(char c) {
@@ -190,13 +190,13 @@ public class MinesweeperGame {
     private static void initializeGame() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 10; j++) {
-                BOARD[i][j] = Cell.ofClosed();
+                BOARD[i][j] = Cell.create();
             }
         }
         for (int i = 0; i < 10; i++) {
             int col = new Random().nextInt(10);
             int row = new Random().nextInt(8);
-            LAND_MINES[row][col] = true;
+            BOARD[row][col].turnOnLandMine();
         }
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 10; col++) {
@@ -226,7 +226,7 @@ public class MinesweeperGame {
                     if (row + 1 < 8 && col + 1 < 10 && LAND_MINES[row + 1][col + 1]) {
                         count++;
                     }
-                    NEARBY_LAND_MINE_COUNTS[row][col] = count;
+                    BOARD[row][col].updateNearbyLandMineCount(count);
                     continue;
                 }
                 NEARBY_LAND_MINE_COUNTS[row][col] = 0;
@@ -234,7 +234,7 @@ public class MinesweeperGame {
         }
     }
 
-    private static void showGameStartCOmments() {
+    private static void showGameStartComments() {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         System.out.println("지뢰찾기 게임 시작!");
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
@@ -244,7 +244,7 @@ public class MinesweeperGame {
         if (row < 0 || row >= 8 || col < 0 || col >= 10) {
             return;
         }
-        if ( BOARD[row][col].doesNotEqualSign()) {
+        if ( BOARD[row][col].isOpened()) {
             return;
         }
         if (LAND_MINES[row][col]) {
