@@ -1,7 +1,7 @@
 package cleancode.minesweeper.tobe;
 
-import cleancode.minesweeper.tobe.cell.Cell;
-import cleancode.minesweeper.tobe.cell.Cell2;
+import cleancode.minesweeper.tobe.game.GameInitializable;
+import cleancode.minesweeper.tobe.game.GameRunnable;
 import cleancode.minesweeper.tobe.cell.LandMineCell;
 import cleancode.minesweeper.tobe.gamelevel.GameLevel;
 import cleancode.minesweeper.tobe.io.ConsoleInputHandler;
@@ -10,7 +10,7 @@ import cleancode.minesweeper.tobe.io.ConsoleOutputHandler;
 import java.util.Scanner;
 
 
-public class MineSweeper {
+public class MineSweeper implements GameInitializable, GameRunnable {
     public static final int BOARD_ROW_SIZE = 10;
     public static final int BOARD_CELL_SIZE = 18;
     public static final int LAND_MINE_COUNT = 10;
@@ -40,45 +40,17 @@ public class MineSweeper {
         return userActionInput.equals("2");
     }
 
-
-
-    private static String getUserActionInputFromUser(Scanner scanner) {
-        consoleOutputHandler.printCommentForUserAction();
-        return consoleInputHandler.getUserInput();
-    }
-
-    private static String getCellInputFromUser(Scanner scanner) {
-        consoleOutputHandler.printCommentForSelectingCell();
-
-        return consoleInputHandler.getUserInput();
-    }
-
-    private static boolean doesUserLoseGame() {
-        return gameStatus == -1;
-    }
-
-    private static boolean doesUserWinGame() {
-        return gameStatus == 1;
-    }
-
-    private static void checkIfGameIsOver() {
-        boolean isAllOpened = gameBoard.isAllCellOpened();
-        if (isAllOpened) {
-            changeGameStatusToWin();
-        }
-    }
-
-    private static void changeGameStatusToWin() {
-        gameStatus = 1;
-    }
-
-
-
-    public void run() {
-
+    @Override
+    public void initialize() {
         consoleOutputHandler.showGameStartComments();
 
         gameBoard.initializeGame();
+    }
+
+    @Override
+    public void run() {
+
+
         while (true) {
             try {
                 consoleOutputHandler.showBoard(gameBoard);
@@ -102,6 +74,8 @@ public class MineSweeper {
             }
         }
     }
+
+
 
     //    private static boolean isAllCellOpened() {
 //        boolean isAllOpened = true;
@@ -143,6 +117,37 @@ public class MineSweeper {
         }
         throw new AppException("잘못된 번호를 선택하셨습니다.");
     }
+
+    private static String getUserActionInputFromUser(Scanner scanner) {
+        consoleOutputHandler.printCommentForUserAction();
+        return consoleInputHandler.getUserInput();
+    }
+
+    private static String getCellInputFromUser(Scanner scanner) {
+        consoleOutputHandler.printCommentForSelectingCell();
+
+        return consoleInputHandler.getUserInput();
+    }
+
+    private static boolean doesUserLoseGame() {
+        return gameStatus == -1;
+    }
+
+    private static boolean doesUserWinGame() {
+        return gameStatus == 1;
+    }
+
+    private static void checkIfGameIsOver() {
+        boolean isAllOpened = gameBoard.isAllCellOpened();
+        if (isAllOpened) {
+            changeGameStatusToWin();
+        }
+    }
+
+    private static void changeGameStatusToWin() {
+        gameStatus = 1;
+    }
+
 }
 
 
