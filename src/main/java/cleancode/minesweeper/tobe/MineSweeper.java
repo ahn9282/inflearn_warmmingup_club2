@@ -4,8 +4,8 @@ import cleancode.minesweeper.tobe.game.GameInitializable;
 import cleancode.minesweeper.tobe.game.GameRunnable;
 import cleancode.minesweeper.tobe.cell.LandMineCell;
 import cleancode.minesweeper.tobe.gamelevel.GameLevel;
-import cleancode.minesweeper.tobe.io.ConsoleInputHandler;
-import cleancode.minesweeper.tobe.io.ConsoleOutputHandler;
+import cleancode.minesweeper.tobe.io.InputHandler;
+import cleancode.minesweeper.tobe.io.OutputHandler;
 
 import java.util.Scanner;
 
@@ -18,15 +18,19 @@ public class MineSweeper implements GameInitializable, GameRunnable {
     private static final Integer[][] NEARBY_LAND_MINE_COUNTS = new Integer[BOARD_ROW_SIZE][BOARD_CELL_SIZE];
     private static final boolean[][] LAND_MINES = new boolean[BOARD_ROW_SIZE][BOARD_CELL_SIZE];
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final ConsoleInputHandler consoleInputHandler = new ConsoleInputHandler();
-    private static final ConsoleOutputHandler consoleOutputHandler = new ConsoleOutputHandler();
+    private  final InputHandler inputHandler;
+    private  final OutputHandler outputHandler;
     private static int gameStatus = 0; // 0: 게임 중, 1: 승리, -1: 패배
     private static final BoardIndexConverter boardIndexConverter = new BoardIndexConverter();
 
 
-    public MineSweeper(GameLevel level) {
+    public MineSweeper(GameLevel level, InputHandler inputHandler, OutputHandler outputHandler) {
         gameBoard = new GameBoard(level);
+        this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
     }
+
+
 
     private static void changeGameStatusToLose() {
         gameStatus = -1;
@@ -42,7 +46,7 @@ public class MineSweeper implements GameInitializable, GameRunnable {
 
     @Override
     public void initialize() {
-        consoleOutputHandler.showGameStartComments();
+        outputHandler.showGameStartComments();
 
         gameBoard.initializeGame();
     }
@@ -53,14 +57,14 @@ public class MineSweeper implements GameInitializable, GameRunnable {
 
         while (true) {
             try {
-                consoleOutputHandler.showBoard(gameBoard);
+                outputHandler.showBoard(gameBoard);
 
                 if (doesUserWinGame()) {
-                    consoleOutputHandler.printGameWinningComment();
+                    outputHandler.printGameWinningComment();
                     break;
                 }
                 if (doesUserLoseGame()) {
-                    consoleOutputHandler.printGameLosingComment();
+                    outputHandler.printGameLosingComment();
                     break;
                 }
                 String cellInput = getCellInputFromUser(SCANNER);
@@ -68,9 +72,9 @@ public class MineSweeper implements GameInitializable, GameRunnable {
                 actOnCell(cellInput, userActionInput);
 
             } catch (AppException | GameException e) {
-                consoleOutputHandler.printExceptionMessage(e);
+                outputHandler.printExceptionMessage(e);
             } catch (Exception e) {
-                consoleOutputHandler.printSimpleMessage(e.getMessage());
+                outputHandler.printSimpleMessage(e.getMessage());
             }
         }
     }
@@ -118,15 +122,15 @@ public class MineSweeper implements GameInitializable, GameRunnable {
         throw new AppException("잘못된 번호를 선택하셨습니다.");
     }
 
-    private static String getUserActionInputFromUser(Scanner scanner) {
-        consoleOutputHandler.printCommentForUserAction();
-        return consoleInputHandler.getUserInput();
+    private  String getUserActionInputFromUser(Scanner scanner) {
+        outputHandler.printCommentForUserAction();
+        return inputHandler.getUserInput();
     }
 
-    private static String getCellInputFromUser(Scanner scanner) {
-        consoleOutputHandler.printCommentForSelectingCell();
+    private  String getCellInputFromUser(Scanner scanner) {
+        outputHandler.printCommentForSelectingCell();
 
-        return consoleInputHandler.getUserInput();
+        return inputHandler.getUserInput();
     }
 
     private static boolean doesUserLoseGame() {

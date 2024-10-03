@@ -5,14 +5,14 @@ import cleancode.minesweeper.tobe.GameBoard;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class ConsoleOutputHandler {
-    public static void showGameStartComments() {
+public class ConsoleOutputHandler implements OutputHandler{
+    public  void showGameStartComments() {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         System.out.println("지뢰찾기 게임 시작!");
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 
-    public static void showBoard(GameBoard board ) {
+    public  void showBoard(GameBoard board ) {
 
         String joiningAlphabets = generateColAlphabets(board);
         System.out.println("    " + joiningAlphabets);
@@ -25,7 +25,7 @@ public class ConsoleOutputHandler {
         }
     }
 
-    private static String generateColAlphabets(GameBoard board) {
+    public  String generateColAlphabets(GameBoard board) {
         List<String> alphabets = IntStream.range(0, board.getColSize())
                 .mapToObj(index -> (char) ('a' + index))
                 .map(c -> c.toString())
