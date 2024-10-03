@@ -1,6 +1,6 @@
 package cleancode.minesweeper.tobe;
 
-import java.awt.desktop.AppReopenedEvent;
+
 
 public class Cell {
     private static final String FLAG_SIGN = "⚑";
@@ -37,6 +37,10 @@ public class Cell {
 
     public static Cell  ofOpen(){
         return of(EMPTY_SIGN, 0, false);
+    }
+
+    public static Cell  ofClosed(){
+        return of(UNCHECKED_SIGN, 0, false);
     }
 
     public static Cell ofNearByLandMineCount(int count) {
@@ -82,7 +86,17 @@ public class Cell {
         return UNCHECKED_SIGN;
     }
 
-    private boolean hasLandMineCount() {
+    boolean hasLandMineCount() {
         return this.nearbyLandCount != 0;
+    }
+    public boolean isClosed(){
+        return !isOpened();
+    }
+
+    public boolean isLandMine() {
+        return isLandMine;
+    }
+    public void open(){
+
     }
 }

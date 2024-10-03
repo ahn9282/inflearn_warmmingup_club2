@@ -15,6 +15,7 @@ public class MinesweeperGame {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static int gameStatus = 0; // 0: 게임 중, 1: 승리, -1: 패배
 
+
     public static void main(String[] args) {
         showGameStartComments();
         initializeGame();
