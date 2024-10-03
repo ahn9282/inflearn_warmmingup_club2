@@ -1,5 +1,7 @@
 package cleancode.minesweeper.tobe;
 
+import cleancode.minesweeper.tobe.cell.Cell;
+
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -56,7 +58,9 @@ public class MinesweeperGame {
 
             if (LAND_MINES[selectedRowIndex][selectedColIndex]) {
 
-                BOARD[selectedRowIndex][selectedColIndex] = Cell.ofLandMine();
+                Cell cell = Cell.create();
+                cell.turnOnLandMine();
+                BOARD[selectedRowIndex][selectedColIndex] = cell;
                 changeGameStatusToLose();
                 return;
             }
@@ -255,7 +259,9 @@ public class MinesweeperGame {
             BOARD[row][col] = Cell.ofNearByLandMineCount(NEARBY_LAND_MINE_COUNTS[row][col]);
             return;
         } else {
-            BOARD[row][col] = Cell.ofOpen();
+            Cell cell = Cell.create();
+            cell.open();
+            BOARD[row][col] =cell;
         }
         open(row - 1, col - 1);
         open(row - 1, col);

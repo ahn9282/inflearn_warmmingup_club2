@@ -1,8 +1,9 @@
 package cleancode.minesweeper.tobe.io;
 
-import cleancode.minesweeper.tobe.AppException;
-import cleancode.minesweeper.tobe.Cell;
 import cleancode.minesweeper.tobe.GameBoard;
+
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class ConsoleOutputHandler {
     public static void showGameStartComments() {
@@ -11,8 +12,10 @@ public class ConsoleOutputHandler {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 
-    public static void showBoard(GameBoard board) {
-        System.out.println("   a b c d e f g h i j");
+    public static void showBoard(GameBoard board ) {
+
+        String joiningAlphabets = generateColAlphabets(board);
+        System.out.println("    " + joiningAlphabets);
         for (int row = 0; row < board.getRowSize(); row++) {
             System.out.printf("%d  ", row + 1);
             for (int col = 0; col < board.getColSize(); col++) {
@@ -20,6 +23,16 @@ public class ConsoleOutputHandler {
             }
             System.out.println();
         }
+    }
+
+    private static String generateColAlphabets(GameBoard board) {
+        List<String> alphabets = IntStream.range(0, board.getColSize())
+                .mapToObj(index -> (char) ('a' + index))
+                .map(c -> c.toString())
+                .toList();
+
+        String joiningAlphabets = String.join(" ", alphabets);
+        return joiningAlphabets;
     }
 
     public void printGameWinningComment() {
@@ -43,7 +56,7 @@ public class ConsoleOutputHandler {
 
     }
 
-    public void printExceptionMessage(AppException e) {
+    public void printExceptionMessage(RuntimeException e) {
         System.out.println(e.getMessage());
     }
 
