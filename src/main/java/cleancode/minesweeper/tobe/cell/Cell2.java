@@ -6,7 +6,6 @@ public abstract class Cell2 {
     protected static final String UNCHECKED_SIGN = "□";
 
 
-    private boolean isLandMine;
     protected boolean isFlagged;
     protected boolean isOpened;
 
