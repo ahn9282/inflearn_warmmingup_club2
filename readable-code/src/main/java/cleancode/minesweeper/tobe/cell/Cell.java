@@ -46,8 +46,8 @@ public class Cell {
         this.isFlagged = true;
     }
 
-    public boolean isChecked() {
-        return this.isFlagged || isOpened;
+    public  boolean isChecked() {
+        return this.isFlagged || this.isOpened;
     }
 
     public boolean isOpened() {
@@ -84,5 +84,9 @@ public class Cell {
 
     public void open() {
         this.isOpened = true;
+    }
+
+    public static boolean isChecked(Cell2 cell) {
+        return cell.isChecked();
     }
 }
