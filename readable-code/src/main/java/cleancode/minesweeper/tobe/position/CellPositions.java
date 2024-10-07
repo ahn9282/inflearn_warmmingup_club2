@@ -1,6 +1,7 @@
 package cleancode.minesweeper.tobe.position;
 
-import cleancode.minesweeper.tobe.cell.Cell2;
+
+import cleancode.minesweeper.tobe.game.BOARD.cell.Cell2;
 
 import java.util.ArrayList;
 import java.util.Collections;

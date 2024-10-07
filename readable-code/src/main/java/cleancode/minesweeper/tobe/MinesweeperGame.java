@@ -1,6 +1,8 @@
 package cleancode.minesweeper.tobe;
 
-import cleancode.minesweeper.tobe.cell.Cell;
+
+import cleancode.minesweeper.tobe.exception.AppException;
+import cleancode.minesweeper.tobe.game.BOARD.cell.Cell;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -261,7 +263,7 @@ public class MinesweeperGame {
         } else {
             Cell cell = Cell.create();
             cell.open();
-            BOARD[row][col] =cell;
+           BOARD[row][col] =cell;
         }
         open(row - 1, col - 1);
         open(row - 1, col);
