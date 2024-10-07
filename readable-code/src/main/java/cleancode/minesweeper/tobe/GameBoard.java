@@ -36,8 +36,6 @@ public class GameBoard {
 
         CellPositions cellPositions = CellPositions.from(BOARD);
 
-        int rowSize = getRowSize();
-        int colSize = getColSize();
 
         intializeEmptyCells(cellPositions);
 
