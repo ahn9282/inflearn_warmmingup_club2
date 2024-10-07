@@ -1,5 +1,6 @@
 package cleancode.minesweeper.tobe;
 
+import cleancode.minesweeper.tobe.config.GameConfig;
 import cleancode.minesweeper.tobe.game.GameInitializable;
 import cleancode.minesweeper.tobe.game.GameRunnable;
 import cleancode.minesweeper.tobe.cell.LandMineCell;
@@ -26,10 +27,10 @@ public class MineSweeper implements GameInitializable, GameRunnable {
     private static final BoardIndexConverter boardIndexConverter = new BoardIndexConverter();
 
 
-    public MineSweeper(GameLevel level, InputHandler inputHandler, OutputHandler outputHandler) {
-        gameBoard = new GameBoard(level);
-        this.inputHandler = inputHandler;
-        this.outputHandler = outputHandler;
+    public MineSweeper(GameConfig gameConfig) {
+        gameBoard = new GameBoard(gameConfig.getGameLevel());
+        this.inputHandler = gameConfig.getInputHandler();
+        this.outputHandler = gameConfig.getOutputHandler();
     }
 
 
