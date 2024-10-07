@@ -115,9 +115,9 @@ public class GameBoard {
         return BOARD[0].length;
     }
 
-    public String getSign(CellPosition cellPosition) {
+    public CellSnapshot getSign(CellPosition cellPosition) {
         Cell2 cell = findCell(cellPosition);
-        return cell.getSign();
+        return cell.getSnapshot();
     }
 
     Cell2 findCell(CellPosition cellPosition) {
