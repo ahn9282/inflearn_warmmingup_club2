@@ -180,4 +180,9 @@ public class GameBoard {
     public boolean doesCellHaveLandMineCount(CellPosition cellPosition) {
         return findCell(cellPosition).hasLandMineCount();
     }
+
+    public CellSnapshot getSnapShot(CellPosition cellPosition) {
+        Cell2 cell = findCell(cellPosition);
+        return cell.getSnapshot();
+    }
 }

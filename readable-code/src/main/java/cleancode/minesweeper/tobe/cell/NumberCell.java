@@ -6,6 +6,8 @@ public class NumberCell extends Cell2 {
     public NumberCell(int nearbyLandCount) {
         this.nearbyLandCount = nearbyLandCount;
     }
+    private final CellState cellState = CellState.initialize();
+
 
     @Override
     public void turnOnLandMine() {
@@ -19,16 +21,7 @@ public class NumberCell extends Cell2 {
     }
 
 
-    @Override
-    public String getSign() {
-        if (isOpened) {
-            return String.valueOf(nearbyLandCount);
-        }
-        if(isFlagged){
-            return FLAG_SIGN;
-        }
-        return UNCHECKED_SIGN;
-    }
+
 
     @Override
     public boolean hasLandMineCount() {
@@ -38,5 +31,14 @@ public class NumberCell extends Cell2 {
     @Override
     public boolean isLandMine() {
         return false;
+    }
+    public CellSnapshot getSnapshot(){
+        if(cellState.isOpened()){
+            return CellSnapshot.ofNumber(nearbyLandCount);
+        }
+        if (cellState.isChecked()) {
+            return CellSnapshot.ofFlag();
+        }
+        return CellSnapshot.ofUnChecked();
     }
 }

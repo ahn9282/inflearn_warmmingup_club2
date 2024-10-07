@@ -7,6 +7,7 @@ import cleancode.minesweeper.tobe.gamelevel.GameLevel;
 import cleancode.minesweeper.tobe.io.InputHandler;
 import cleancode.minesweeper.tobe.io.OutputHandler;
 import cleancode.minesweeper.tobe.position.CellPosition;
+import cleancode.minesweeper.tobe.user.UserAction;
 
 import java.util.Scanner;
 
@@ -37,12 +38,12 @@ public class MineSweeper implements GameInitializable, GameRunnable {
         gameStatus = -1;
     }
 
-    private static boolean doesUserChooseToOpenCell(String userActionInput) {
-        return userActionInput.equals("1");
+    private static boolean doesUserChooseToOpenCell(UserAction userAction) {
+        return userAction == UserAction.OPEN;
     }
 
-    private static boolean doesUserChooseToPlantFlag(String userActionInput) {
-        return userActionInput.equals("2");
+    private static boolean doesUserChooseToPlantFlag(UserAction userAction) {
+        return userAction == UserAction.FLAG;
     }
 
     @Override
@@ -69,7 +70,7 @@ public class MineSweeper implements GameInitializable, GameRunnable {
                     break;
                 }
                 CellPosition cellInput = getCellInputFromUser(SCANNER);
-                String userActionInput = getUserActionInputFromUser(SCANNER);
+                UserAction userActionInput = getUserActionInputFromUser(SCANNER);
                 actOnCell(cellInput, userActionInput);
 
             } catch (AppException | GameException e) {
@@ -96,17 +97,17 @@ public class MineSweeper implements GameInitializable, GameRunnable {
 
 
 
-    private void actOnCell(CellPosition cellInput, String userActionInput) {
+    private void actOnCell(CellPosition cellInput, UserAction userAction) {
 
         int selectedRowIndex = cellInput.getRowIndex();
         int selectedColIndex = cellInput.getColIndex();
 
-        if (doesUserChooseToPlantFlag(userActionInput)) {
+        if (doesUserChooseToPlantFlag(userAction)) {
 
             gameBoard.flag(cellInput);
             checkIfGameIsOver();
 
-        } else if (doesUserChooseToOpenCell(userActionInput)) {
+        } else if (doesUserChooseToOpenCell(userAction)) {
 
             if (LAND_MINES[selectedRowIndex][selectedColIndex]) {
 
@@ -124,9 +125,9 @@ public class MineSweeper implements GameInitializable, GameRunnable {
         throw new AppException("잘못된 번호를 선택하셨습니다.");
     }
 
-    private  String getUserActionInputFromUser(Scanner scanner) {
+    private UserAction getUserActionInputFromUser(Scanner scanner) {
         outputHandler.printCommentForUserAction();
-        return inputHandler.getUserInput();
+        return inputHandler.getUserActionFromUser();
     }
 
     private CellPosition getCellInputFromUser(Scanner scanner) {
