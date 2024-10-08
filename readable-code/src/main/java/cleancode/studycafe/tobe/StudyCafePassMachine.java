@@ -4,6 +4,7 @@ import cleancode.studycafe.tobe.exception.AppException;
 import cleancode.studycafe.tobe.io.StudyCafeFileHandler;
 import cleancode.studycafe.tobe.io.StudyCafeIOHandler;
 import cleancode.studycafe.tobe.model.*;
+import cleancode.studycafe.tobe.model.order.StudyCafePassOrder;
 import cleancode.studycafe.tobe.model.pass.locker.StudyCafeLockerPass;
 import cleancode.studycafe.tobe.model.pass.locker.StudyCafeLockerPasses;
 import cleancode.studycafe.tobe.model.pass.StudyCafeSeatPass;
@@ -26,10 +27,13 @@ public class StudyCafePassMachine {
 
             Optional<StudyCafeLockerPass> optionalLockerPass = selectLockerPass(selectedPass);
 
-            optionalLockerPass.ifPresentOrElse(
-                    lockerPass -> ioHandler.showPassOrderSummary(selectedPass, optionalLockerPass.get()),
-                    () -> ioHandler.showPassOrderSummary(selectedPass)
+            StudyCafePassOrder passOrder = StudyCafePassOrder.of(
+                    selectedPass,
+                    optionalLockerPass.orElse(null)
             );
+
+            ioHandler.showPassOrderSummary(passOrder);
+
 
         } catch (AppException e) {
             ioHandler.showSimpleMessage(e.getMessage());
