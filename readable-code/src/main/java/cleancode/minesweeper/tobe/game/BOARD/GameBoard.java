@@ -9,6 +9,7 @@ import cleancode.minesweeper.tobe.position.RelativePosition;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 public class GameBoard {
     private final Cell2[][] BOARD;
@@ -139,6 +140,27 @@ public class GameBoard {
                 .forEach(this::openSurroundedCells);
 
     }
+    public void openSurroundedCells2(CellPosition cellPosition) {
+        Stack<CellPosition> stack = new Stack<>();
+        stack.push(cellPosition);
+
+        while (!stack.isEmpty()) {
+            openAndPushCellAt(stack);
+        }
+    }
+
+    private void openAndPushCellAt(Stack<CellPosition> stack) {
+        CellPosition currentCellPosition = stack.pop();
+        if (isOpenedCell(currentCellPosition))return;
+        if(isLandMineCell(currentCellPosition)) return;
+        open(currentCellPosition);
+        if(doesCellHaveLandMineCount(currentCellPosition)) return;
+
+        List<CellPosition> surroundedPositions = calCalculateSurroundedPosition(currentCellPosition);
+        for (CellPosition surroundedPosition : surroundedPositions) {
+            stack.push(surroundedPosition);
+        }
+    }
 
     public void open(CellPosition cellPosition) {
         Cell2 cell = findCell(cellPosition);
@@ -191,7 +213,7 @@ public class GameBoard {
 
     void checkIfGameIsOver() {
         boolean isAllOpened = isAllCellOpened();
-        if (isAllOpened) {
+        if (isAllCellChecked()) {
             changeGameStatusToWin();
         }
     }

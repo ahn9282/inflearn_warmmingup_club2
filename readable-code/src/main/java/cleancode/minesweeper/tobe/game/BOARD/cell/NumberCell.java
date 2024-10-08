@@ -1,6 +1,5 @@
 package cleancode.minesweeper.tobe.game.BOARD.cell;
 
-import cleancode.minesweeper.tobe.game.BOARD.cell.Cell2;
 
 public class NumberCell extends Cell2 {
     private final int nearbyLandCount;
@@ -21,9 +20,6 @@ public class NumberCell extends Cell2 {
     public void updateNearbyLandMineCount(int count) {
 
     }
-
-
-
 
     @Override
     public boolean hasLandMineCount() {

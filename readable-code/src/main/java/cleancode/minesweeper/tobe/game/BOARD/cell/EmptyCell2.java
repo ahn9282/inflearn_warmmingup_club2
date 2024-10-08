@@ -3,7 +3,7 @@ package cleancode.minesweeper.tobe.game.BOARD.cell;
 public class EmptyCell2 implements cleancode.minesweeper.tobe.BOARD.cell.Cell3 {
     private static final String EMPTY_SIGN = "■";
 
-    private final cleancode.minesweeper.tobe.BOARD.cell.CellState cellState = cleancode.minesweeper.tobe.BOARD.cell.CellState.initialize();
+    private final CellState cellState = CellState.initialize();
 
     @Override
     public void turnOnLandMine() {

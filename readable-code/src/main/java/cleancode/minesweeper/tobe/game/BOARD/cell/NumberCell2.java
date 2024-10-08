@@ -1,8 +1,8 @@
-package cleancode.minesweeper.tobe.BOARD.cell;
+package cleancode.minesweeper.tobe.game.BOARD.cell;
 
 public class NumberCell2 implements cleancode.minesweeper.tobe.BOARD.cell.Cell3 {
     private final int nearbyLandCount;
-    private final cleancode.minesweeper.tobe.BOARD.cell.CellState cellState = cleancode.minesweeper.tobe.BOARD.cell.CellState.initialize();
+    private final CellState cellState = CellState.initialize();
 
     public NumberCell2(int nearbyLandCount) {
         this.nearbyLandCount = nearbyLandCount;
