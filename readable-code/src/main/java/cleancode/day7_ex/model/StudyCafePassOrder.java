@@ -1,12 +1,8 @@
-package cleancode.studycafe.tobe.model.order;
+package cleancode.day7_ex.model;
 
 
-
-
-
-
-import cleancode.studycafe.tobe.model.pass.StudyCafeSeatPass;
-import cleancode.studycafe.tobe.model.pass.locker.StudyCafeLockerPass;
+import cleancode.day7_ex.model.pass.StudyCafeLockerPass;
+import cleancode.day7_ex.model.pass.StudyCafeSeatPass;
 
 import java.util.Optional;
 
@@ -32,10 +28,9 @@ public class StudyCafePassOrder {
     }
 
     public int getDiscountPrice() {
-
         return seatPass.getDiscountPrice();
-
     }
+
 
     public int getTotalPrice() {
         return seatPass.getPrice() - getDiscountPrice() + (lockerPass != null ? lockerPass.getPrice() : 0);

@@ -1,10 +1,8 @@
-package cleancode.studycafe.tobe.model.pass.locker;
+package cleancode.day7_ex.model.pass;
 
+import cleancode.day7_ex.model.StudyCafePassType;
 
-import cleancode.studycafe.tobe.model.StudyCafePassType;
-import cleancode.studycafe.tobe.model.pass.StudyCafePass;
-
-public class StudyCafeLockerPass implements StudyCafePass {
+public class StudyCafeLockerPass implements StudyCafePass{
 
     private final StudyCafePassType passType;
     private final int duration;
@@ -20,19 +18,9 @@ public class StudyCafeLockerPass implements StudyCafePass {
         return new StudyCafeLockerPass(passType, duration, price);
     }
 
-    public boolean isSameDuration(int duration) {
-        return this.duration == duration;
-    }
-
-    public boolean isSamePassType(StudyCafePassType passType) {
-        return this.passType == passType;
-    }
-
     public StudyCafePassType getPassType() {
         return passType;
     }
-
-
 
     public int getDuration() {
         return duration;
@@ -42,6 +30,12 @@ public class StudyCafeLockerPass implements StudyCafePass {
         return price;
     }
 
+    public boolean isSameDuration(int duration) {
+        return this.duration == duration;
+    }
 
+    public boolean isSamePassType(StudyCafePassType passType) {
+        return this.passType == passType;
+    }
 
 }
