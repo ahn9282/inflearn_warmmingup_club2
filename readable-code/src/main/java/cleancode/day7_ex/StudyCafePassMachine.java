@@ -50,8 +50,8 @@ public class StudyCafePassMachine {
 
     private StudyCafeSeatPass getSelectSeatPass() {
         StudyCafePassType passType = ioHandler.getPassesType();
-        StudyCafeSeatPasses studyCafePasses = seatPassProvider.getSeatPasses();
 
+        StudyCafeSeatPasses studyCafePasses = seatPassProvider.getSeatPasses();
         List<StudyCafeSeatPass> passes = studyCafePasses.findPassBy(passType);
 
         return ioHandler.askPassSelecting(passes);

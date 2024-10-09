@@ -32,7 +32,7 @@ public class OutputHandler {
         System.out.println("이용권 목록");
         for (int index = 0; index < passes.size(); index++) {
             StudyCafePass pass = passes.get(index);
-            System.out.println(String.format("%s. ", index + 1) + pass);
+            System.out.println(String.format("%s. ", index + 1) + display(pass));
         }
     }
 
