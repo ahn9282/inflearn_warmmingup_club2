@@ -1,6 +1,8 @@
 package test_study.cafekiosk.unit;
 
 import org.assertj.core.api.Assertions;
+import org.hibernate.query.sqm.mutation.internal.cte.CteInsertStrategy;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -11,7 +13,23 @@ import static org.junit.jupiter.api.Assertions.*;
 class CafeKioskTest {
 
     @Test
-    void add(){
+    void calculateTotalPrice(){
+        CafeKiosk cafeKiosk = new CafeKiosk();
+        Americano americano = new Americano();
+        Latte latte = new Latte();
+        cafeKiosk.add(americano);
+        cafeKiosk.add(latte);
+
+        int totalPrice = cafeKiosk.calculateTotalPrice();
+
+        assertThat(totalPrice).isEqualTo(8000);
+
+    }
+
+
+    @DisplayName("음료 1개를 추가하면 주문 목록에 담긴다.")
+    @Test
+    void add() {
         CafeKiosk cafeKiosk = new CafeKiosk();
         cafeKiosk.add(new Americano());
 
@@ -68,6 +86,7 @@ class CafeKioskTest {
         cafeKiosk.clear();
         assertThat(cafeKiosk.getBeverages()).isEmpty();
     }
+
 
 
     @Test
