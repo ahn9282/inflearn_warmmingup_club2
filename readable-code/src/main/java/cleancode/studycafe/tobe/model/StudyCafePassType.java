@@ -20,7 +20,7 @@ public enum StudyCafePassType {
         return ! isLockerType();
     }
 
-    private boolean isLockerType() {
+    public boolean isLockerType() {
         return LOCKER_TYPES.contains(this);
     }
 

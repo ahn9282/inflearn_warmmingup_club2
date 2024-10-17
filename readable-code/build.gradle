@@ -18,10 +18,14 @@ tasks.withType(JavaCompile) {
 
 
 dependencies {
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.2'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.26.3'
 }
 
 tasks.named('test') {
+    useJUnitPlatform()
+}
+test {
     useJUnitPlatform()
 }
