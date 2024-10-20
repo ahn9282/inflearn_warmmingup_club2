@@ -4,19 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d12f1dc7-a758-400a-b954-e73a10af25bb" name="Changes" comment="읽기 좋은 코드 프롲게트 추가">
-      <change afterPath="$PROJECT_DIR$/src/test/java/cleancode/studycafe/tobe/model/StudyCafePassTypeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cleancode/studycafe/tobe/model/pass/StudyCafeSeatPassTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cleancode/studycafe/tobe/model/pass/StudyCafeSeatPassesTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.5/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="d12f1dc7-a758-400a-b954-e73a10af25bb" name="Changes" comment="day 12 미션">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cleancode/studycafe/tobe/model/StudyCafePassType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cleancode/studycafe/tobe/model/StudyCafePassType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cleancode/studycafe/tobe/model/pass/StudyCafeSeatPass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cleancode/studycafe/tobe/model/pass/StudyCafeSeatPass.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,25 +76,25 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Gradle.StudyCafePassTypeTest.descriptionCheckTest.executor": "Run",
-    "Gradle.StudyCafePassTypeTest.test.executor": "Run",
-    "Gradle.인프런 워밍업클럽2 BE [:StudyCafeApplication.main()].executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/study_Dev/인프런 워밍업클럽2 BE 클린코드&테스트/inflearn_warmmingup_club2/readable-code/build.gradle",
-    "settings.editor.selected.configurable": "editing.templates"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Gradle.StudyCafePassTypeTest.descriptionCheckTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.StudyCafePassTypeTest.test.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.인프런 워밍업클럽2 BE [:StudyCafeApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/study_Dev/인프런 워밍업클럽2 BE 클린코드&amp;테스트/inflearn_warmmingup_club2/readable-code/build.gradle&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -224,7 +213,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728195631474</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="day 12 미션">
+      <option name="closed" value="true" />
+      <created>1729172939831</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1729172939831</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -241,7 +238,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="읽기 좋은 코드 프롲게트 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="읽기 좋은 코드 프롲게트 추가" />
+    <MESSAGE value="day 12 미션" />
+    <option name="LAST_COMMIT_MESSAGE" value="day 12 미션" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
