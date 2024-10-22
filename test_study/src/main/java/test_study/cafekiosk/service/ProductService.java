@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import test_study.cafekiosk.domain.Product;
 import test_study.cafekiosk.domain.ProductResponse;
 import test_study.cafekiosk.domain.ProductSellingStatus;
-import test_study.cafekiosk.reposiotry.ProductRepository;
+import test_study.cafekiosk.repository.ProductRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
