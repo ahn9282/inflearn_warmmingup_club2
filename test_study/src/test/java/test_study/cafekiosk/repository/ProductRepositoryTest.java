@@ -9,9 +9,11 @@ import test_study.cafekiosk.domain.Product;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 import static test_study.cafekiosk.domain.ProductSellingStatus.*;
-import static test_study.cafekiosk.domain.ProductType.*;
+import static test_study.cafekiosk.domain.ProductType.BAKERY;
+import static test_study.cafekiosk.domain.ProductType.HANDMADE;
 
 @ActiveProfiles("test")
 //@SpringBootTest
@@ -19,6 +21,62 @@ import static test_study.cafekiosk.domain.ProductType.*;
 class ProductRepositoryTest {
     @Autowired
     private ProductRepository productRepository;
+
+
+    @DisplayName("가장 마지막으로 저장한 상품의 상품번호를 읽어오기, 단 상품이 하나도 없는 경우에는 null을 반환")
+    @Test
+    void findLatestProductNumberWhenProductIsEmpty() {
+        //Given
+        productRepository.deleteAll();
+
+        //When
+        String result = productRepository.findLatestProduct();
+
+        //Then
+        assertThat(result).isEqualTo(null);
+
+    }
+
+
+
+    @DisplayName("가장 마지막으로 저장한 상품의 상품번호를 읽어오기")
+    @Test
+    void findLatestProduct() {
+        //Given
+        Product product1 = Product.builder()
+                .productNumber("001")
+                .name("테스트 상품1")
+                .type(HANDMADE)
+                .price(4000)
+                .sellingStatus(SELLING)
+                .build();
+
+        Product product2 = Product.builder()
+                .productNumber("002")
+                .name("테스트 상품2")
+                .type(HANDMADE)
+                .price(3500)
+                .sellingStatus(HOLD)
+                .build();
+
+        String targetProductNumber = "003";
+
+        Product product3 = Product.builder()
+                .productNumber(targetProductNumber)
+                .name("테스트 상품3")
+                .type(BAKERY)
+                .price(5000)
+                .sellingStatus(STOP_SELLING)
+                .build();
+
+        productRepository.saveAll(List.of(product1, product2, product3));
+        //When
+        String result = productRepository.findLatestProduct();
+
+        //Then
+        assertThat(result).isEqualTo(targetProductNumber);
+
+    }
 
     @DisplayName("원하는 판매 상태를 가진 상품들을 조회")
     @Test
@@ -57,8 +115,8 @@ class ProductRepositoryTest {
         assertThat(products).hasSize(2)
                 .extracting("productNumber", "name", "sellingStatus")
                 .containsExactlyInAnyOrder(
-                    tuple("001","테스트 상품1", SELLING),
-                    tuple("002","테스트 상품2", HOLD)
+                        tuple("001", "테스트 상품1", SELLING),
+                        tuple("002", "테스트 상품2", HOLD)
                 );
 
     }
@@ -67,6 +125,7 @@ class ProductRepositoryTest {
     @Test
     void findAllByProductNumberInTest() {
         //Given
+
         Product product1 = Product.builder()
                 .productNumber("001")
                 .name("테스트 상품1")
@@ -100,8 +159,8 @@ class ProductRepositoryTest {
         assertThat(products).hasSize(2)
                 .extracting("productNumber", "name", "sellingStatus")
                 .containsExactlyInAnyOrder(
-                        tuple("001","테스트 상품1", SELLING),
-                        tuple("002","테스트 상품2", HOLD)
+                        tuple("001", "테스트 상품1", SELLING),
+                        tuple("002", "테스트 상품2", HOLD)
                 );
 
     }
