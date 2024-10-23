@@ -4,15 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import test_study.cafekiosk.controller.ProductCreateRequest;
 import test_study.cafekiosk.domain.Product;
-import test_study.cafekiosk.domain.ProductResponse;
+import test_study.cafekiosk.dto.ProductResponse;
 import test_study.cafekiosk.repository.ProductRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static test_study.cafekiosk.domain.ProductSellingStatus.SELLING;
 import static test_study.cafekiosk.domain.ProductSellingStatus.forDisplay;
-import static test_study.cafekiosk.domain.ProductType.HANDMADE;
 
 @RequiredArgsConstructor
 @Service

@@ -1,7 +1,10 @@
-package test_study.cafekiosk.domain;
+package test_study.cafekiosk.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import test_study.cafekiosk.domain.Product;
+import test_study.cafekiosk.domain.ProductSellingStatus;
+import test_study.cafekiosk.domain.ProductType;
 
 @Getter
 public class ProductResponse {

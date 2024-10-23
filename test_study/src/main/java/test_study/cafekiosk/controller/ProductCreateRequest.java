@@ -1,5 +1,6 @@
 package test_study.cafekiosk.controller;
 
+import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,9 +12,16 @@ import test_study.cafekiosk.domain.ProductType;
 @NoArgsConstructor
 public class ProductCreateRequest {
 
+    @NotNull(message = "상품 타입은 필수입니다.")
     private ProductType type;
+
+    @NotNull(message = "상품 판매상태는 필수입니다.")
     private ProductSellingStatus status;
+
+    @NotBlank(message = "상품 이름은 필수입니다.")
     private String name;
+
+    @Positive(message = "상품 가격은 양수가 필수입니다.")
     private int price;
 
     @Builder

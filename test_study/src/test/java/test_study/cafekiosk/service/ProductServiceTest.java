@@ -1,6 +1,5 @@
 package test_study.cafekiosk.service;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import test_study.cafekiosk.controller.ProductCreateRequest;
 import test_study.cafekiosk.domain.Product;
-import test_study.cafekiosk.domain.ProductResponse;
+import test_study.cafekiosk.dto.ProductResponse;
 import test_study.cafekiosk.domain.ProductSellingStatus;
 import test_study.cafekiosk.domain.ProductType;
 import test_study.cafekiosk.repository.ProductRepository;

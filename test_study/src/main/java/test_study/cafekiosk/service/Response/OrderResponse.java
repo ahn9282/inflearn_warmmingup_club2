@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import test_study.cafekiosk.domain.Order;
 import test_study.cafekiosk.domain.OrderStatus;
-import test_study.cafekiosk.domain.ProductResponse;
+import test_study.cafekiosk.dto.ProductResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
