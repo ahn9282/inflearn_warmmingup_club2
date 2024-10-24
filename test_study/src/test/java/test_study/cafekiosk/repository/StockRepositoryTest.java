@@ -8,13 +8,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import test_study.cafekiosk.domain.Product;
 import test_study.cafekiosk.domain.Stock;
-import test_study.cafekiosk.service.OrderService;
+import test_study.cafekiosk.service.order.OrderService;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
-import static org.junit.jupiter.api.Assertions.*;
 import static test_study.cafekiosk.domain.ProductSellingStatus.*;
 import static test_study.cafekiosk.domain.ProductType.BAKERY;
 import static test_study.cafekiosk.domain.ProductType.HANDMADE;

@@ -1,8 +1,8 @@
-package test_study.cafekiosk.service;
+package test_study.cafekiosk.service.order;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import test_study.cafekiosk.domain.Order;
+import test_study.cafekiosk.domain.order.Order;
 import test_study.cafekiosk.domain.Product;
 import test_study.cafekiosk.domain.ProductType;
 import test_study.cafekiosk.domain.Stock;
@@ -10,14 +10,12 @@ import test_study.cafekiosk.repository.OrderRepository;
 import test_study.cafekiosk.repository.ProductRepository;
 import test_study.cafekiosk.repository.StockRepository;
 import test_study.cafekiosk.request.OrderCreateRequest;
-import test_study.cafekiosk.service.Response.OrderResponse;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor

@@ -1,6 +1,5 @@
 package test_study.cafekiosk.service;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,8 @@ import test_study.cafekiosk.repository.OrderRepository;
 import test_study.cafekiosk.repository.ProductRepository;
 import test_study.cafekiosk.repository.StockRepository;
 import test_study.cafekiosk.request.OrderCreateRequest;
-import test_study.cafekiosk.service.Response.OrderResponse;
+import test_study.cafekiosk.service.order.OrderResponse;
+import test_study.cafekiosk.service.order.OrderService;
 
 import java.time.LocalDateTime;
 import java.util.List;

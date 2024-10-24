@@ -1,9 +1,9 @@
-package test_study.cafekiosk.service.Response;
+package test_study.cafekiosk.service.order;
 
 import lombok.Builder;
 import lombok.Getter;
-import test_study.cafekiosk.domain.Order;
-import test_study.cafekiosk.domain.OrderStatus;
+import test_study.cafekiosk.domain.order.Order;
+import test_study.cafekiosk.domain.order.OrderStatus;
 import test_study.cafekiosk.dto.ProductResponse;
 
 import java.time.LocalDateTime;

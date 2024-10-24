@@ -1,10 +1,9 @@
-package test_study.cafekiosk.domain.orderproduct;
+package test_study.cafekiosk.domain.order;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import test_study.cafekiosk.domain.Order;
 import test_study.cafekiosk.domain.Product;
 
 @Getter

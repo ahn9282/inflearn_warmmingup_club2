@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import test_study.cafekiosk.request.OrderCreateRequest;
-import test_study.cafekiosk.service.OrderService;
-import test_study.cafekiosk.service.Response.OrderResponse;
+import test_study.cafekiosk.service.order.OrderService;
+import test_study.cafekiosk.service.order.OrderResponse;
 
 import java.time.LocalDateTime;
 

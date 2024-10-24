@@ -1,14 +1,14 @@
 package test_study.cafekiosk.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import test_study.cafekiosk.domain.order.Order;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static test_study.cafekiosk.domain.OrderStatus.INIT;
+import static test_study.cafekiosk.domain.order.OrderStatus.INIT;
 import static test_study.cafekiosk.domain.ProductSellingStatus.SELLING;
 import static test_study.cafekiosk.domain.ProductType.*;
 
