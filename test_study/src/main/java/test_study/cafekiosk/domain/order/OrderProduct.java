@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import test_study.cafekiosk.domain.Product;
+import test_study.cafekiosk.domain.product.Product;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

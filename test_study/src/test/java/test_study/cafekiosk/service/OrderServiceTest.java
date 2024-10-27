@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
-import test_study.cafekiosk.domain.Product;
-import test_study.cafekiosk.domain.ProductType;
+import test_study.cafekiosk.IntegrationTestSupport;
+import test_study.cafekiosk.domain.product.Product;
+import test_study.cafekiosk.domain.product.ProductType;
 import test_study.cafekiosk.domain.Stock;
 import test_study.cafekiosk.repository.OrderProductRepository;
 import test_study.cafekiosk.repository.OrderRepository;
@@ -22,13 +23,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static test_study.cafekiosk.domain.ProductSellingStatus.*;
-import static test_study.cafekiosk.domain.ProductType.*;
+import static test_study.cafekiosk.domain.product.ProductSellingStatus.*;
+import static test_study.cafekiosk.domain.product.ProductType.*;
 
 @SpringBootTest
 @Transactional
 @ActiveProfiles("test")
-class OrderServiceTest {
+class OrderServiceTest extends IntegrationTestSupport {
 
     @Autowired
     ProductRepository productRepository;
@@ -48,6 +49,10 @@ class OrderServiceTest {
         orderProductRepository.deleteAllInBatch();
         productRepository.deleteAllInBatch();
         orderRepository.deleteAllInBatch();
+
+        orderRepository.deleteAll();
+
+        stockRepository.deleteAllInBatch();
     }
 
     @DisplayName("재고와 관련된 상품이 포함되어 있는 주문 번호 리스트를 받아 주문을 생성한다.")

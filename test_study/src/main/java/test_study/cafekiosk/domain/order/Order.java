@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import test_study.cafekiosk.BaseEntity;
-import test_study.cafekiosk.domain.Product;
+import test_study.cafekiosk.domain.product.Product;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

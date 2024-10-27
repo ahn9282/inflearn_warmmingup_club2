@@ -1,25 +1,25 @@
 package test_study.cafekiosk.service;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import test_study.cafekiosk.IntegrationTestSupport;
 import test_study.cafekiosk.controller.ProductCreateRequest;
-import test_study.cafekiosk.domain.Product;
+import test_study.cafekiosk.domain.product.Product;
 import test_study.cafekiosk.dto.ProductResponse;
-import test_study.cafekiosk.domain.ProductSellingStatus;
-import test_study.cafekiosk.domain.ProductType;
+import test_study.cafekiosk.domain.product.ProductSellingStatus;
+import test_study.cafekiosk.domain.product.ProductType;
 import test_study.cafekiosk.repository.ProductRepository;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static test_study.cafekiosk.domain.ProductSellingStatus.*;
-import static test_study.cafekiosk.domain.ProductType.HANDMADE;
+import static test_study.cafekiosk.domain.product.ProductSellingStatus.*;
+import static test_study.cafekiosk.domain.product.ProductType.HANDMADE;
 @ActiveProfiles("test")
 @SpringBootTest
-class ProductServiceTest {
+class ProductServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductService productService;
@@ -27,12 +27,31 @@ class ProductServiceTest {
     private ProductRepository productRepository;
 
 
+    @BeforeAll
+    static void beforeAll(){
+        //before Class
+    }
+    @BeforeEach
+    void setUp(){
+        // before method
+
+        //각 테스트 입장에서 봤을 때 :" 아예 몰라도 테스트 내용을 이해하는 데에 문제가 없는가?
+        //수정해도 모든 테스트에 영향을 주지 않는가?
+
+    }
+    @AfterEach
+    void tearDown() {
+        productRepository.deleteAllInBatch();
+
+    }
+
+
     @DisplayName("등록된 상품이 없을 경우. 상품 번호는 가장 최근 상품번호는 001")
     @Test
     void createProductNonExistProduct() {
         //Given
 
-        ProductCreateRequest request =  ProductCreateRequest.builder()
+        ProductCreateRequest request = ProductCreateRequest.builder()
                 .type(HANDMADE)
                 .status(SELLING)
                 .name("캬라멜 마끼야또")

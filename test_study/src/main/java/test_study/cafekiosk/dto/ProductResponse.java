@@ -2,9 +2,9 @@ package test_study.cafekiosk.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import test_study.cafekiosk.domain.Product;
-import test_study.cafekiosk.domain.ProductSellingStatus;
-import test_study.cafekiosk.domain.ProductType;
+import test_study.cafekiosk.domain.product.Product;
+import test_study.cafekiosk.domain.product.ProductSellingStatus;
+import test_study.cafekiosk.domain.product.ProductType;
 
 @Getter
 public class ProductResponse {

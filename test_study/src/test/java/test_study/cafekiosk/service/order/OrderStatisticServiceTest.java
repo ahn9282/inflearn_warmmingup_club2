@@ -1,6 +1,5 @@
 package test_study.cafekiosk.service.order;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,9 +7,10 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import test_study.cafekiosk.IntegrationTestSupport;
 import test_study.cafekiosk.client.mail.MailSendClient;
-import test_study.cafekiosk.domain.Product;
-import test_study.cafekiosk.domain.ProductType;
+import test_study.cafekiosk.domain.product.Product;
+import test_study.cafekiosk.domain.product.ProductType;
 import test_study.cafekiosk.domain.history.MailSendHistory;
 import test_study.cafekiosk.domain.order.Order;
 import test_study.cafekiosk.domain.order.OrderStatus;
@@ -25,12 +25,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static test_study.cafekiosk.domain.ProductSellingStatus.SELLING;
-import static test_study.cafekiosk.domain.ProductType.HANDMADE;
+import static test_study.cafekiosk.domain.product.ProductSellingStatus.SELLING;
+import static test_study.cafekiosk.domain.product.ProductType.HANDMADE;
 
 
 @SpringBootTest
-class OrderStatisticServiceTest {
+class OrderStatisticServiceTest  extends IntegrationTestSupport {
 
     @Autowired
     OrderProductRepository orderProductRepository;

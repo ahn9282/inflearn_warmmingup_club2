@@ -4,9 +4,9 @@ import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import test_study.cafekiosk.domain.Product;
-import test_study.cafekiosk.domain.ProductSellingStatus;
-import test_study.cafekiosk.domain.ProductType;
+import test_study.cafekiosk.domain.product.Product;
+import test_study.cafekiosk.domain.product.ProductSellingStatus;
+import test_study.cafekiosk.domain.product.ProductType;
 
 @Getter
 @NoArgsConstructor

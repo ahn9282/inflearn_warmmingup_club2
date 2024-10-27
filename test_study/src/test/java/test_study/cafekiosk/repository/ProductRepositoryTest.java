@@ -5,15 +5,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
-import test_study.cafekiosk.domain.Product;
+import test_study.cafekiosk.domain.product.Product;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
-import static test_study.cafekiosk.domain.ProductSellingStatus.*;
-import static test_study.cafekiosk.domain.ProductType.BAKERY;
-import static test_study.cafekiosk.domain.ProductType.HANDMADE;
+import static test_study.cafekiosk.domain.product.ProductSellingStatus.*;
+import static test_study.cafekiosk.domain.product.ProductType.BAKERY;
+import static test_study.cafekiosk.domain.product.ProductType.HANDMADE;
 
 @ActiveProfiles("test")
 //@SpringBootTest
@@ -25,12 +25,12 @@ class ProductRepositoryTest {
 
     @DisplayName("가장 마지막으로 저장한 상품의 상품번호를 읽어오기, 단 상품이 하나도 없는 경우에는 null을 반환")
     @Test
-    void findLatestProductNumberWhenProductIsEmpty() {
+    void findLatestProductNumberWhenProductNumberIsEmpty() {
         //Given
         productRepository.deleteAll();
 
         //When
-        String result = productRepository.findLatestProduct();
+        String result = productRepository.findLatestProductNumber();
 
         //Then
         assertThat(result).isEqualTo(null);
@@ -41,7 +41,7 @@ class ProductRepositoryTest {
 
     @DisplayName("가장 마지막으로 저장한 상품의 상품번호를 읽어오기")
     @Test
-    void findLatestProduct() {
+    void findLatestProductNumber() {
         //Given
         Product product1 = Product.builder()
                 .productNumber("001")
@@ -71,7 +71,7 @@ class ProductRepositoryTest {
 
         productRepository.saveAll(List.of(product1, product2, product3));
         //When
-        String result = productRepository.findLatestProduct();
+        String result = productRepository.findLatestProductNumber();
 
         //Then
         assertThat(result).isEqualTo(targetProductNumber);

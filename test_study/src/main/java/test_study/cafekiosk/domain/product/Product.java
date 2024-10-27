@@ -1,4 +1,4 @@
-package test_study.cafekiosk.domain;
+package test_study.cafekiosk.domain.product;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
