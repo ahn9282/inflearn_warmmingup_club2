@@ -14,9 +14,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ProductControllerDocsTest extends RestDocsSupport {
@@ -33,7 +35,6 @@ public class ProductControllerDocsTest extends RestDocsSupport {
     void createProduct() throws Exception {
 
         ProductCreateRequest request = ProductCreateRequest.builder()
-                .status(ProductSellingStatus.SELLING)
                 .type(ProductType.HANDMADE)
                 .status(ProductSellingStatus.SELLING)
                 .name("아메리카노")
@@ -51,7 +52,6 @@ public class ProductControllerDocsTest extends RestDocsSupport {
                         .build()
                 );
 
-
         mockMvc.perform(
                         post("/api/v1/products/new")
                                 .content(objectMapper.writeValueAsString(request))
@@ -60,7 +60,10 @@ public class ProductControllerDocsTest extends RestDocsSupport {
                 )
                 .andDo(print())
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.id").value(1L)) // 추가된 검증
                 .andDo(document("product-create",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
                         requestFields(
                                 fieldWithPath("type").type(JsonFieldType.STRING).description("상품 타입"),
                                 fieldWithPath("status").type(JsonFieldType.STRING).description("상품 판매 상태"),
@@ -68,22 +71,18 @@ public class ProductControllerDocsTest extends RestDocsSupport {
                                 fieldWithPath("price").type(JsonFieldType.NUMBER).description("상품 가격")
                         ),
                         responseFields(
-
-                                        fieldWithPath("code").type(JsonFieldType.NUMBER).description("코드"),
-                                        fieldWithPath("http_status").type(JsonFieldType.STRING).description("HTTP 상태"),
-                                        fieldWithPath("message").type(JsonFieldType.STRING).description("메세지"),
-                                        fieldWithPath("data").type(JsonFieldType.OBJECT).description("응답 데이터"),
-                                        fieldWithPath("data.id").type(JsonFieldType.NUMBER).description("상품 ID"),
-                                        fieldWithPath("data.productNumber").type(JsonFieldType.STRING).description("상품 번호"),
-                                        fieldWithPath("data.price").type(JsonFieldType.NUMBER).description("상품 가격"),
-                                        fieldWithPath("data.productType").type(JsonFieldType.STRING).description("상품 타입"),
-                                        fieldWithPath("data.sellingStatus").type(JsonFieldType.STRING).description("상품 판매상태"),
-                                        fieldWithPath("data.name").type(JsonFieldType.STRING).description("상품 이름")
-
-
+                                fieldWithPath("code").type(JsonFieldType.NUMBER).description("코드"),
+                                fieldWithPath("http_status").type(JsonFieldType.STRING).description("HTTP 상태"),
+                                fieldWithPath("message").type(JsonFieldType.STRING).description("메세지"),
+                                fieldWithPath("data").type(JsonFieldType.OBJECT).description("응답 데이터"),
+                                fieldWithPath("data.id").type(JsonFieldType.NUMBER).description("상품 ID"),
+                                fieldWithPath("data.productNumber").type(JsonFieldType.STRING).description("상품 번호"),
+                                fieldWithPath("data.price").type(JsonFieldType.NUMBER).description("상품 가격"),
+                                fieldWithPath("data.productType").type(JsonFieldType.STRING).description("상품 타입"),
+                                fieldWithPath("data.sellingStatus").type(JsonFieldType.STRING).description("상품 판매상태"),
+                                fieldWithPath("data.name").type(JsonFieldType.STRING).description("상품 이름")
                         )
                 ));
-
     }
 
 }
